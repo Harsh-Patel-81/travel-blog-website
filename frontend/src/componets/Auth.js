@@ -1,7 +1,11 @@
-import { Box,Button, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import axios from 'axios'
+import { authActions } from '../store';
+import { useDispatch } from "react-redux";
 
 const Auth = () => {
+  const dispath = useDispatch();
   const [inputs, setInputs]=useState({
     name:"",email:"",password:""
   })
@@ -12,9 +16,25 @@ const Auth = () => {
       [e.target.name]:e.target.value,
     }))
   }
-  const handleSubmit=(e)=>{
+  const sendRequest = async (type = "login") => {
+    const res = await axios.post(`http://localhost:5000/api/users/${type}`, {
+      name: inputs.name,
+      email: inputs.email,
+      password: inputs.password
+    }).catch((err) => console.log(err))
+
+    const data = await res.data
+    return data
+  }
+  const handleSubmit = (e) => {
     e.preventDefault()
     console.log(inputs);
+    if (isSignup) {
+      sendRequest("signup").then((data)=>localStorage.setItem(("userId",data.user._id))).then(() => dispath(authActions.login())).then(data => console.log(data))
+    } else {
+      sendRequest().then((data)=>localStorage.setItem(("userId",data.user._id))).then(() => dispath(authActions.login())).then(data => console.log(data))
+    }
+
   }
   return (
     <div>
