@@ -7,6 +7,7 @@ export const getAllBlog = async (req, res, next) => {
     let blogs
     try {
         blogs = await Blog.find().populate("user");
+        blogs.reverse();
     } catch (err) {
         return console.log(err)
     }

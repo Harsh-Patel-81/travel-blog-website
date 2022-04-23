@@ -1,51 +1,86 @@
 import React from 'react';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { CardHeader, Avatar, CardMedia, CardContent,  Typography,Card, Box, IconButton} from '@mui/material';
+import { CardHeader, Avatar, CardMedia, CardContent, Typography, Card, Box, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import ReactReadMoreReadLess from "react-read-more-read-less";
 
-const Blog = (title,description, imageURL, userName , isUser, id) => {
-  const navigate= useNavigate();
-  const handleEdit=(e)=>{
+
+const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
+  const navigate = useNavigate();
+  const handleEdit = () => {
     navigate(`/myblogs/${id}`)
   }
-  //console.log(title,isUser);
-  return (
-    <div><Card sx={{ Width: "40%", margin: 'auto', mt:2, padding:2, boxShadow:"5px 5px 0px #ccc",":hover:":{
-        boxShadow:"10px 10px 20px #ccc"
-    }  }}>
-      { isUser && (
-        <Box display='flex'>
-          <IconButton onClick={handleEdit} sx={{marginLeft:'auto'}}><ModeEditOutlineIcon/></IconButton>
-          <IconButton onClick={handleEdit}><DeleteForeverIcon/></IconButton>
-        </Box>
-      )
+  console.log(title, isUser);
 
-      }
-    <CardHeader
-      avatar={
-        <Avatar sx={{ bgcolor:'red' }} aria-label="recipe">
-         {userName.charAt[0]} 
-        </Avatar>
-        //{userName}
-      }
-      
-      title={title}
-      subheader="September 14, 2016"
-    />
-    <CardMedia
-      component="img"
-      height="194"
-      image={imageURL}
-      alt="Paella dish"
-    />
-    <CardContent>
-      <Typography variant="body2" color="text.secondary">
-       {description}
-      </Typography>
-    </CardContent>
-    
-  </Card></div>
+  const deleteRequest = async () => {
+    const res = await axios.delete(`http://localhost:2000/api/blogs/${id}`).catch((err) => console.log(err))
+    const data = res.data
+    return data
+  }
+
+  const handleDelete = () => {
+    deleteRequest().then(() => navigate("/")).then(() => navigate("/blogs"))
+  }
+
+  return (
+    <div>
+      {""}
+      <Card sx={{
+        width: "40%", margin: 'auto', mt: 2, padding: 2, boxShadow: "5px 5px 10px #ccc", ":hover": {
+          boxShadow: "10px 10px 20px #ccc"
+        }
+      }}>
+
+        {isUser && (
+          <Box display='flex'>
+            <IconButton onClick={handleEdit} sx={{ marginLeft: 'auto' }}><ModeEditOutlineIcon color='warning' /></IconButton>
+            <IconButton onClick={handleDelete}><DeleteForeverIcon color='error' /></IconButton>
+          </Box>
+        )
+        }
+
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe">
+              {userName.charAt(0)}
+            </Avatar>
+            //{userName}
+            //{userName.charAt[0]} 
+          }
+
+          title={title}
+          subheader="September 14, 2016"
+        />
+        <CardMedia
+          component="img"
+          height="194"
+          image={imageURL}
+          alt="Paella dish"
+        />
+        <CardContent style={{ position: 'relative' }}>
+          <hr />
+          <br />
+          <Typography className='container' variant="body2" color="text.secondary">
+
+            <b>{userName}</b> {": "}
+            <ReactReadMoreReadLess
+              charLimit={200}
+              readMoreText={"Read more ▼"}
+              readLessText={"Read less ▲"}
+              readMoreClassName="read-more-less--more"
+              readLessClassName="read-more-less--less"
+            >
+              {description}
+            </ReactReadMoreReadLess>
+          </Typography>
+        </CardContent>
+
+
+      </Card>
+    </div >
+    //{description}
   )
 }
 
