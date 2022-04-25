@@ -48,12 +48,12 @@ const BlogDetail = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(inputs);
-    sendRequest().then((data) => console.log(data)).then(() => navigate("/myBlogs/"))
+    sendRequest().then((data) => console.log(data)).then(() => navigate("/myBlogs"))
   }
 
   return <div>
     {inputs && <form onSubmit={handleSubmit}>
-      <Box border={3} borderColor="linear-gradient(90deg, rgba(32,2,30,1) 0%, rgba(65,7,107,1) 50%, rgba(28,1,26,1) 100%)" borderRadius={10} boxShadow="10px 10px 20px #ccc" padding={3} margin={"auto"} marginTop={3} display="flex" flexDirection={'column'} width={"80%"}>
+      <Box border={3} backgroundColor="white" borderColor="linear-gradient(90deg, rgba(32,2,30,1) 0%, rgba(65,7,107,1) 50%, rgba(28,1,26,1) 100%)" borderRadius={10} boxShadow="10px 10px 20px #d84315" padding={3} margin={"auto"} marginTop={3} display="flex" flexDirection={'column'} width={"80%"}>
         <Typography fontWeight={'bold'} padding={3} color='grey' variant='h2' textAlign={'center'} >Post Your Blog</Typography>
         <InputLabel sx={labelStyles} >Title</InputLabel>
         <TextField name="title" onChange={handleChange} value={inputs.title} margin='auto' variant='outlined' />

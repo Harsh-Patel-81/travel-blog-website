@@ -12,7 +12,7 @@ const Header = ({ setClickOnLogIn }) => {
     <Toolbar>
       <Typography variant="h4">TravelDiaries</Typography>
       {isLoggedIn && <Box display="flex" marginLeft={"auto"} marginRight={"auto"}>
-        <Tabs textColor='inherit' value={value} onChange={(e, val) => setValue(val)}>
+        <Tabs indicatorColor="white" textColor='white' value={value} onChange={(e, val) => setValue(val)}>
           <Tab LinkComponent={Link} to="/blogs" label="All Blogs" />
           <Tab LinkComponent={Link} to="/myBlogs" label="My Blogs" />
           <Tab LinkComponent={Link} to="/blogs/add" label="Add Blog" />
@@ -21,7 +21,7 @@ const Header = ({ setClickOnLogIn }) => {
       <Box display="flex" marginLeft="auto">
         {!isLoggedIn && <Button onClick={() => setClickOnLogIn(false)} LinkComponent={Link} to="/auth" variant='contained' sx={{ margin: '1', borderRadius: 10 }} color="warning">Login</Button>
         }
-        {isLoggedIn && <Button onClick={() => dispath(authActions.logout())} LinkComponent={Link} to="/auth" variant='contained' sx={{ margin: '1', borderRadius: 10 }} color="warning">Logout</Button>}
+        {isLoggedIn && <Button onClick={() => dispath(authActions.logout())} LinkComponent={Link} to="/" variant='contained' sx={{ margin: '1', borderRadius: 10 }} color="warning">Logout</Button>}
       </Box>
     </Toolbar>
   </AppBar>

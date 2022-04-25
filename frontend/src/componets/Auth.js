@@ -47,8 +47,8 @@ const Auth = () => {
   }
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <Box maxWidth={400} display="flex" flexDirection={"column"} alignItems="center" justifyContent={"center"} boxShadow="10px 10px 20px #ccc" padding={3} margin='auto' marginTop={5} borderRadius={5}>
+      <form onSubmit={handleSubmit} >
+        <Box style={{ backgroundColor: "white" }} maxWidth={400} display="flex" flexDirection={"column"} alignItems="center" justifyContent={"center"} boxShadow="10px 10px 20px #ccc" padding={3} margin='auto' marginTop={5} borderRadius={5}>
           <Typography variant="h2" padding={3} textAlign="center">{isSignup ? "Signup" : "Login"}</Typography>
           {isSignup && <TextField name="name" onChange={handleChange} value={inputs.name} placeholder="Name" margin='normal' />}
           <TextField name="email" onChange={handleChange} value={inputs.email} type={"email"} placeholder='Email' margin='normal' />

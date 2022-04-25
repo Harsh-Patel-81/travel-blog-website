@@ -20,16 +20,24 @@ const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
     return data
   }
 
+  const sendRequestForUpdata = async () => {
+    const res = await axios.get("http://localhost:2000/api/blogs").catch(err => console.log(err));
+    const data = await res.data;
+    return data;
+  }
+
   const handleDelete = () => {
-    deleteRequest().then(() => navigate("/")).then(() => navigate("/blogs"))
+    deleteRequest()
+    sendRequestForUpdata()
+    navigate('/')
   }
 
   return (
     <div>
       {""}
       <Card sx={{
-        width: "40%", margin: 'auto', mt: 2, padding: 2, boxShadow: "5px 5px 10px #ccc", ":hover": {
-          boxShadow: "10px 10px 20px #ccc"
+        width: "40%", margin: 'auto', mt: 2, padding: 2, color: "black", boxShadow: "5px 5px 10px #d84315", ":hover": {
+          boxShadow: "10px 10px 20px #d84315"
         }
       }}>
 
@@ -51,7 +59,7 @@ const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
           }
 
           title={title}
-          subheader="September 14, 2016"
+
         />
         <CardMedia
           component="img"
@@ -62,13 +70,13 @@ const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
         <CardContent style={{ position: 'relative' }}>
           <hr />
           <br />
-          <Typography className='container' variant="body2" color="text.secondary">
+          <Typography className='container' variant="body2" >
 
             <b>{userName}</b> {": "}
             <ReactReadMoreReadLess
               charLimit={200}
-              readMoreText={"Read more ▼"}
-              readLessText={"Read less ▲"}
+              readMoreText={"...Read more ▼"}
+              readLessText={"...Read less ▲"}
               readMoreClassName="read-more-less--more"
               readLessClassName="read-more-less--less"
             >
