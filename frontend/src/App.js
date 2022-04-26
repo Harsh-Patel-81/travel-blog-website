@@ -27,8 +27,6 @@ function App() {
   return <React.Fragment>
     <header>
       <Header />
-      {/* <Route path="/blogs" element={<Blogs />} /> */}
-      {/* <Blogs /> */}
     </header>
     <main>
       <Routes>

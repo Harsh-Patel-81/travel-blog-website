@@ -5,6 +5,7 @@ import { CardHeader, Avatar, CardMedia, CardContent, Typography, Card, Box, Icon
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactReadMoreReadLess from "react-read-more-read-less";
+import './Blog.css'
 
 
 const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
@@ -35,7 +36,7 @@ const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
   return (
     <div>
       {""}
-      <Card sx={{
+      <Card className="blog" sx={{
         width: "40%", margin: 'auto', mt: 2, padding: 2, color: "black", boxShadow: "5px 5px 10px #d84315", ":hover": {
           boxShadow: "10px 10px 20px #d84315"
         }

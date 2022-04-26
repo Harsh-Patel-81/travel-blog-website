@@ -19,9 +19,9 @@ const Header = ({ setClickOnLogIn }) => {
         </Tabs>
       </Box>}
       <Box display="flex" marginLeft="auto">
-        {!isLoggedIn && <Button onClick={() => setClickOnLogIn(false)} LinkComponent={Link} to="/auth" variant='contained' sx={{ margin: '1', borderRadius: 10 }} color="warning">Login</Button>
+        {!isLoggedIn && <Button onClick={() => setClickOnLogIn(false)} LinkComponent={Link} to="/auth" color="warning">Login</Button>
         }
-        {isLoggedIn && <Button onClick={() => dispath(authActions.logout())} LinkComponent={Link} to="/" variant='contained' sx={{ margin: '1', borderRadius: 10 }} color="warning">Logout</Button>}
+        {isLoggedIn && <Button onClick={() => dispath(authActions.logout())} LinkComponent={Link} to="/" color="warning">Logout</Button>}
       </Box>
     </Toolbar>
   </AppBar>
