@@ -34,7 +34,7 @@ const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
   }
 
   return (
-    <div>
+    <div >
       {""}
       <Card className="blog" sx={{
         width: "40%", margin: 'auto', mt: 2, padding: 2, color: "black", boxShadow: "5px 5px 10px #d84315", ":hover": {

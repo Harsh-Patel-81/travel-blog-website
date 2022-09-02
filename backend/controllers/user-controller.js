@@ -11,6 +11,7 @@ export const getAllUser = async (req, res, next) => {
     }
     if (!users) {
         return res.status(404).json({ message: "No user found" })
+        //res.end()
     }
 
     //200 for success
@@ -72,5 +73,5 @@ export const login = async (req, res, next) => {
     if (!isPasswordCorrect) {
         return res.status(400).json({ message: 'incorrect password' })  //unauthorised
     }
-    return res.status(200).json({ message: "login successful", user:existingUser }) //correct
+    return res.status(200).json({ message: "login successful", user: existingUser }) //correct
 }
